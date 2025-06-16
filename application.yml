@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hnw_toy
+    username: postgres
+    password: Abcd1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+
+  sql:
+    init:
+      continue-on-error: true
+      mode: always
+
+  server:
+    port: 8080
+
+---
+# 로컬 프로필 설정
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  # 로깅 설정
+  logging:
+    level:
+      org.springframework.web: DEBUG
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+      org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter: TRACE
+
+  # JPA 설정 (로컬 프로필에서만 사용할 설정)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        # 테이블 이름을 소문자로 자동 변환하는 설정
+        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
