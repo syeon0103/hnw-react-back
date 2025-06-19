@@ -23,6 +23,7 @@ spring:
     init:
       continue-on-error: true
       mode: always
+      schema-locations: classpath:schema.sql
 
   server:
     port: 8080
